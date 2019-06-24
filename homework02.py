@@ -94,7 +94,7 @@ def outcome(board):
             if board[position] == 1: x_win += 1 
             if board[position] == 0: o_win += 1 
         if x_win == 3: return X_WINS
-        if o_win == 3: return O_WINS 
+        if o_win == 3: return O_WINS
         x_win = 0
         o_win = 0
     if undef: return UNDEFINED
