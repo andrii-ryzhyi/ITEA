@@ -44,7 +44,9 @@ def slice3(board):
      (0, 0, 1),
      (0, 0, None)]
     """
-    return (board[:3], board[3:6], board[6:], board[::3], board[1::3], board[2::3], board[::4], board[2:7:2])
+    win_combinations = (board[:3], board[3:6], board[6:], board[::3], board[1::3], board[2::3], board[::4], board[2:7:2])
+    for combination in win_combinations:
+        yield combination
 
 
 
@@ -84,15 +86,15 @@ def outcome(board):
     ... X, X, O))
     3
     """
-    wins = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
+    # wins = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
     x_win = 0
     o_win = 0
     undef = 0
-    for combination in wins:
+    for combination in slice3(board):
         for position in combination:
-            if board[position] is None: undef += 1
-            if board[position] == 1: x_win += 1 
-            if board[position] == 0: o_win += 1 
+            if position is None: undef += 1
+            elif position == 1: x_win += 1
+            elif position == 0: o_win += 1
         if x_win == 3: return X_WINS
         if o_win == 3: return O_WINS
         x_win = 0
